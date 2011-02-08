@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='djanginxed',
-    version='0.0.1',
+    version='0.0.2',
     description='Django Nginx Memcached integration.',
     long_description = open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read() + open('CHANGELOG.rst', 'r').read(),
     author='Praekelt Foundation',

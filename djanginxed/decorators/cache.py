@@ -30,7 +30,7 @@ def cache_page(timeout, key_prefix=''):
             response = cache.get(cache_key, None)
             if response is None:
                 response = view_func(request, *args, **kwargs)
-                cache.set(cache_key, response, timeout)
+                cache.set(cache_key, response.content, timeout)
             return response
         return wraps(view_func, assigned=available_attrs(view_func))(_wrapped_view)
     return decorator

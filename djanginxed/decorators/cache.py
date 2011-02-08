@@ -11,10 +11,10 @@ def get_cache_key(request, key_prefix):
     thus enabling Memcached lookup straight from Nginx.
     
     Additionally there is the key prefix that is used to distinguish different
-    cache areas in a multi-site setup. 
+    cache areas in a multi-site setup. The key prefix is prepended to the request path md5.
     """
     key_prefix = key_prefix or settings.CACHE_MIDDLEWARE_KEY_PREFIX
-    return hashlib.md5(key_prefix + request.get_full_path()).hexdigest()
+    return key_prefix + hashlib.md5(request.get_full_path()).hexdigest()
 
 def cache_page(timeout, key_prefix=''):
     """

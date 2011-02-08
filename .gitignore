@@ -1,1 +1,3 @@
 *.swp
+djanginxed.egg-info
+*.pyc

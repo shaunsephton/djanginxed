@@ -5,13 +5,13 @@ Djanginxed
 Provides a view decorator caching content in Memcached for easy retrieval via Nginx. The cache is keyed by md5 of full request path (which includes GET parameters).
 
 .. contents:: Contents
-    :depth: 5
+    :depth: 3
 
 Installation
 ------------
 
 #. Install or add djanginxed to your Python path.
-#. Setup Memcached appropriately as described in `Django's cache framewrok docs <http://docs.djangoproject.com/en/dev/topics/cache/#memcached>`_.
+#. Setup Memcached appropriately as described in `Django's cache framework docs <http://docs.djangoproject.com/en/dev/topics/cache/#memcached>`_.
 #. Optionally, set the ``CACHE_MIDDLEWARE_KEY_PREFIX`` setting in your Django's settings file -- If the cache is shared across multiple sites using the same Django installation, set this to the name of the site, or some other string that is unique to the Django instance, to prevent key collisions::
 
     CACHE_MIDDLEWARE_KEY_PREFIX = "site1"

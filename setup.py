@@ -1,4 +1,10 @@
 from setuptools import setup, find_packages
+from setuptools.command.test import test
+
+class TestRunner(test):
+    def run(self, *args, **kwargs):
+        from runtests import runtests
+        runtests()
 
 setup(
     name='djanginxed',
@@ -11,6 +17,11 @@ setup(
     url='http://github.com/shaunsephton/djanginxed',
     packages = find_packages(),
     include_package_data=True,
+    install_requires=[
+        'django-snippetscream',
+    ],
+    test_suite = 'djanginxed.tests',
+    cmdclass={"test": TestRunner},
     classifiers = [
         "Programming Language :: Python",
         "License :: OSI Approved :: BSD License",

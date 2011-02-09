@@ -73,6 +73,7 @@ Example::
         ...
 
 This will cache the view's response string in Memcached, with the cache key generated from the full request path.
+
 **NOTE: The resulting HttpResponse object's content value is stored in Memcached and not the actual HttpResponse object.**
 
 ``cache_page`` can also take an optional keyword argument, ``key_prefix``, which works in the same way as the ``CACHE_MIDDLEWARE_KEY_PREFIX`` setting for the middleware. It can be used like this::

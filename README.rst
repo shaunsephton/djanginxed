@@ -11,8 +11,8 @@ Installation
 ------------
 
 #. Install or add djanginxed to your Python path.
-#. Setup Memcached appropriately as described in `Django's cache framewrok docs <http://docs.djangoproject.com/en/dev/topics/cache/#memcached>`_).
-#. Optionally, set the ``CACHE_MIDDLEWARE_KEY_PREFIX`` setting in your Django's settings file -- If the cache is shared across multiple sites using the same Django installation, set this to the name of the site, or some other string that is unique to this Django instance, to prevent key collisions::
+#. Setup Memcached appropriately as described in `Django's cache framewrok docs <http://docs.djangoproject.com/en/dev/topics/cache/#memcached>`_.
+#. Optionally, set the ``CACHE_MIDDLEWARE_KEY_PREFIX`` setting in your Django's settings file -- If the cache is shared across multiple sites using the same Django installation, set this to the name of the site, or some other string that is unique to the Django instance, to prevent key collisions::
 
     CACHE_MIDDLEWARE_KEY_PREFIX = "site1"
 
@@ -49,7 +49,7 @@ Installation
         fastcgi_param   PATH_INFO           $fastcgi_script_name;
     }
 
-#. Optionally, when using a cache key prefix, include it during Nginx memcached_key generation::
+#. Optionally, when using a cache key prefix, include it during Nginx ``$memcached_key`` generation::
 
     set_md5 $memcached_key site1$request_uri;
 

@@ -68,11 +68,11 @@ Example::
 
     from djanginxed.decorators.cache import cache_page
 
-    @cache_page(60 * 60)
+    @cache_page(60 * 15)
     def my_view(request):
         ...
 
-This will cache the view's response string in Memcached, with the cache key generated from the full request path.
+This will cache the view's response string in Memcached for 15 minutes (60 * 15), with the cache key generated from the full request path.
 
 **NOTE: The resulting HttpResponse object's content value is stored in Memcached and not the actual HttpResponse object.**
 

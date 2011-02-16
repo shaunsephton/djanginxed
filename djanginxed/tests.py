@@ -1,11 +1,16 @@
 import hashlib
 
 from django.conf import settings
+from django.core.cache import cache as django_cache
+
 from django.http import HttpResponse, HttpRequest
 from django.test import TestCase
 
 from djanginxed.decorators import cache
 from snippetscream import RequestFactory
+
+def test_key_generator(request):
+    return 'foobar'
 
 class DecoratorCacheTestCase(TestCase):
     def test_get_cache_key(self):
@@ -30,10 +35,23 @@ class DecoratorCacheTestCase(TestCase):
         request = RequestFactory().get('/?foo=bar')
         key = cache.get_cache_key(request, '')
         self.assertEqual(key, hashlib.md5('/?foo=bar').hexdigest())
+        
+        # With a key generator the resulting key should be the key generator's result.
+        request = RequestFactory().get('/?foo=bar')
+        key = cache.get_cache_key(request, '', key_generator=test_key_generator)
+        self.assertEqual(key, test_key_generator(request))
+        
+        # With prefix provided through param and key generator, return prefix + key_generator result.
+        request = RequestFactory().get('/?foo=bar')
+        key = cache.get_cache_key(request, 'prefix', key_generator=test_key_generator)
+        self.assertEqual(key, 'prefix' + test_key_generator(request))
     
     def test_cache_page(self):
         def my_view(request):
             return HttpResponse("response")
+
+        # Clear the cache before we do anything.
+        django_cache.clear()
 
         # On cache miss return HttpResponse object with "response" content.
         my_view_cached = cache.cache_page(123)(my_view)
